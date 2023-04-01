@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addContacts } from 'redux/boxSlice';
 
 export default function ConstactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -21,8 +25,10 @@ export default function ConstactForm({ onSubmit }) {
   };
 
   const handleSubmit = evt => {
+    console.log(evt.target);
     evt.preventDefault();
     onSubmit({ name, number });
+    dispatch(addContacts(evt.target.elements.name.value));
     setName('');
     setNumber('');
   };
