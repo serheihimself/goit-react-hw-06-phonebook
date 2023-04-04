@@ -25,10 +25,9 @@ export default function ConstactForm({ onSubmit }) {
   };
 
   const handleSubmit = evt => {
-    console.log(evt.target);
     evt.preventDefault();
     onSubmit({ name, number });
-    dispatch(addContacts(evt.target.elements.name.value));
+    dispatch(addContacts(onSubmit));
     setName('');
     setNumber('');
   };

@@ -1,19 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ConstactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList ';
+import { useSelector } from 'react-redux';
+import { getContacts, getFilterValue } from '../redux/boxSlice';
 import { nanoid } from 'nanoid';
 
 export default function App() {
-  const [contacts, setContacts] = useState(() => {
-    const saveContact = localStorage.getItem('key');
-    if (saveContact !== null) {
-      const parseContact = JSON.parse(saveContact);
-      return parseContact;
-    }
-    return [];
-  });
-  const [filter, setFilter] = useState('');
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilterValue);
 
   useEffect(() => {
     window.localStorage.setItem('key', JSON.stringify(contacts));
@@ -26,9 +21,7 @@ export default function App() {
     if (trueFilter) {
       return alert(`${newContact.name} is already in contacts.`);
     }
-    setContacts(prevState => {
-      return [...prevState, { ...newContact, id: nanoid() }];
-    });
+    return { ...newContact, id: nanoid() };
   };
 
   const filterContacts = () => {
@@ -39,13 +32,11 @@ export default function App() {
   };
 
   const onFilterChange = evt => {
-    setFilter(evt.target.value);
+    return evt.target.value;
   };
 
   const deletedContacts = nameId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== nameId)
-    );
+    return prevState => prevState.filter(contact => contact.id !== nameId);
   };
 
   return (
