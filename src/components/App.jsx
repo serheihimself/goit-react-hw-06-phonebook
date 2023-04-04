@@ -2,13 +2,15 @@ import { useEffect } from 'react';
 import ConstactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList ';
-import { useSelector } from 'react-redux';
+import { deleteContacts } from '../redux/boxSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilterValue } from '../redux/boxSlice';
 import { nanoid } from 'nanoid';
 
 export default function App() {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilterValue);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.localStorage.setItem('key', JSON.stringify(contacts));
@@ -36,7 +38,7 @@ export default function App() {
   };
 
   const deletedContacts = nameId => {
-    return prevState => prevState.filter(contact => contact.id !== nameId);
+    dispatch(deleteContacts(nameId));
   };
 
   return (

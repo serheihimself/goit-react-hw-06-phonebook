@@ -3,7 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: 'root',
+  key: 'contacts',
   storage,
 };
 
@@ -14,19 +14,8 @@ export const boxSlice = createSlice({
     filter: '',
   },
   reducers: {
-    addContact: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-      prepare({ name, number }) {
-        return {
-          payload: {
-            id: nanoid(),
-            name,
-            number,
-          },
-        };
-      },
+    addContact: (state, action) => {
+      state.contacts.push(action.payload);
     },
     deleteContacts: (state, action) => {
       const index = state.findIndex(task => task.id === action.payload);

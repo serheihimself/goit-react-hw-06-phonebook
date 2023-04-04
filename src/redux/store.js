@@ -13,7 +13,6 @@ import {
 export const store = configureStore({
   reducer: {
     contacts: persistedReducer,
-    filter: '',
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
