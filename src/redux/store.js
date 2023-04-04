@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { boxSlice } from './boxSlice';
+import { persistedReducer } from './boxSlice';
+import persistStore from 'redux-persist/es/persistStore';
 
 export const store = configureStore({
   reducer: {
-    contacts: boxSlice.reducer,
+    contacts: persistedReducer,
     filter: '',
   },
 });
+
+export const persistor = persistStore(store);
