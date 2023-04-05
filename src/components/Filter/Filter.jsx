@@ -1,13 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { filterContact } from '../../redux/boxSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/boxSlice';
 
-function Filter({ value, onFilterChange }) {
+function Filter() {
   const dispatch = useDispatch();
   const filterValue = useSelector(getFilterValue);
-  dispatch(filterContact(value));
+  const onFilterChange = evt => {
+    dispatch(filterContact(evt.target.value));
+  };
   return (
     <input
       type="text"
@@ -18,10 +19,5 @@ function Filter({ value, onFilterChange }) {
     />
   );
 }
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onFilterChange: PropTypes.func.isRequired,
-};
 
 export default Filter;

@@ -33,10 +33,6 @@ export default function App() {
     );
   };
 
-  const onFilterChange = evt => {
-    return evt.target.value;
-  };
-
   const deletedContacts = nameId => {
     dispatch(deleteContacts(nameId));
   };
@@ -48,7 +44,7 @@ export default function App() {
       {contacts.length > 0 ? (
         <>
           <h2>Contacts</h2>
-          <Filter value={filter} onFilterChange={onFilterChange} />
+          <Filter />
           <ContactList
             onFilterContacts={filterContacts()}
             onChange={deletedContacts}

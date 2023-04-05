@@ -14,12 +14,11 @@ export const boxSlice = createSlice({
     filter: '',
   },
   reducers: {
-    addContact: (state, action) => {
+    addContacts: (state, action) => {
       state.contacts.push(action.payload);
     },
-    deleteContacts: (state, action) => {
-      const index = state.findIndex(task => task.id === action.payload);
-      state.splice(index, 1);
+    deleteContacts: (state, { payload: id }) => {
+      state.contacts = state.contacts.filter(contact => contact.id !== id);
     },
     filterContact: (state, action) => {
       state.filter = action.payload;
