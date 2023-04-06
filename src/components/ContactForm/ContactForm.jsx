@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/boxSlice';
+import { getContacts } from 'redux/boxSlice';
 import { Form, Input, Button } from './ContactForm.styles';
+import { nanoid } from 'nanoid';
 
-export default function ConstactForm({ onSubmit }) {
+export default function ConstactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(getContacts);
 
   const dispatch = useDispatch();
 
@@ -26,8 +29,13 @@ export default function ConstactForm({ onSubmit }) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const newContact = onSubmit({ name, number });
-    dispatch(addContacts(newContact));
+    const trueFilter = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (trueFilter) {
+      return alert(`${name} is already in contacts.`);
+    }
+    dispatch(addContacts({ name, number, id: nanoid() }));
     setName('');
     setNumber('');
   };

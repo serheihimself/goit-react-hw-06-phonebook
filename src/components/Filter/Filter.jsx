@@ -3,7 +3,7 @@ import { filterContact } from '../../redux/boxSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/boxSlice';
 
-function Filter() {
+export default function Filter() {
   const dispatch = useDispatch();
   const filterValue = useSelector(getFilterValue);
   const onFilterChange = evt => {
@@ -19,5 +19,3 @@ function Filter() {
     />
   );
 }
-
-export default Filter;
