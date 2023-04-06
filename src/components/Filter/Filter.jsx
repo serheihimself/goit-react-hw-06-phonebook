@@ -7,7 +7,7 @@ function Filter() {
   const dispatch = useDispatch();
   const filterValue = useSelector(getFilterValue);
   const onFilterChange = evt => {
-    dispatch(filterContact(evt.target.value));
+    dispatch(filterContact(evt.currentTarget.value));
   };
   return (
     <input
