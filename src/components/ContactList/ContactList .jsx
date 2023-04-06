@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function ContactList({ onFilterContacts, onChange }) {
   return (
@@ -19,13 +18,3 @@ function ContactList({ onFilterContacts, onChange }) {
 }
 
 export default ContactList;
-
-ContactList.propTypes = {
-  onFilterContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ),
-};

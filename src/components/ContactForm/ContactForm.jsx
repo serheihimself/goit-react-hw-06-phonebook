@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import { addContacts } from 'redux/boxSlice';
+import { Form, Input, Button } from './ContactForm.styles';
 
 export default function ConstactForm({ onSubmit }) {
   const [name, setName] = useState('');
@@ -33,9 +33,9 @@ export default function ConstactForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <label htmlFor="name">Name</label>
-      <input
+      <Input
         type="text"
         name="name"
         value={name}
@@ -45,7 +45,7 @@ export default function ConstactForm({ onSubmit }) {
         required
       />
       <label htmlFor="number">Number</label>
-      <input
+      <Input
         type="tel"
         name="number"
         value={number}
@@ -54,11 +54,7 @@ export default function ConstactForm({ onSubmit }) {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <button type="submit">Add contact</button>
-    </form>
+      <Button type="submit">Add contact</Button>
+    </Form>
   );
 }
-
-ConstactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

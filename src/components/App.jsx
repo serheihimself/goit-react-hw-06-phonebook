@@ -5,6 +5,7 @@ import ContactList from './ContactList/ContactList ';
 import { deleteContacts } from '../redux/boxSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilterValue } from '../redux/boxSlice';
+import { Container, Title, SecondTitle } from './App.styles';
 import { nanoid } from 'nanoid';
 
 export default function App() {
@@ -38,8 +39,8 @@ export default function App() {
   };
 
   return (
-    <div>
-      <h1>Phonebook</h1>
+    <Container>
+      <Title>Phonebook</Title>
       <ConstactForm onSubmit={addContactsList} />
       {contacts.length > 0 ? (
         <>
@@ -51,8 +52,8 @@ export default function App() {
           />
         </>
       ) : (
-        <h2>"Contact list is empty"</h2>
+        <SecondTitle>"Contact list is empty"</SecondTitle>
       )}
-    </div>
+    </Container>
   );
 }
